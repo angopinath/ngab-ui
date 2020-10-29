@@ -1,25 +1,43 @@
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import TractInfo from './player/TrackInfo'
+class App extends Component {
+  state = {
+    isLoading: true,
+    groups: []
+  };
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  async componentDidMount() {
+    const response = await fetch('/api/employees');
+    const body = await response.json();
+    this.setState({ groups: body, isLoading: false });
+  }
+
+  render() {
+    const {groups, isLoading} = this.state;
+
+    if (isLoading) {
+      return <p>Loading...</p>;
+    }
+
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <TractInfo/>
+          <div className="App-intro">
+            <h2>List</h2>
+            {groups.map(group =>
+              <div key={group.id}>
+                {group.id}
+              </div>
+            )}
+          </div>
+        </header>
+      </div>
+    );
+  }
 }
 
 export default App;

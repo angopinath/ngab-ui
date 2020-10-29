@@ -10,6 +10,7 @@
     "react": "^17.0.1",
     "react-cookie": "3.0.4",
     "react-dom": "^17.0.1",
+    "react-native-track-player": "^1.2.3",
     "react-router-dom": "4.3.1",
     "react-scripts": "4.0.0",
     "reactstrap": "6.5.0",
@@ -21,6 +22,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "http://localhost:8080",
   "eslintConfig": {
     "extends": [
       "react-app",
